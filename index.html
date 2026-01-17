@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Learn With Champak — App</title>
+    <meta
+      name="description"
+      content="Installable PWA wrapper for learnwithchampak.live"
+    />
+    <meta name="theme-color" content="#d97706" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icons/icon-192.png" />
+    <style>
+      :root {
+        --bg: #fff7e6;
+        --card: #fff;
+        --ink: #1f2937;
+        --muted: #6b7280;
+        --brand: #d97706;
+        --brand2: #f59e0b;
+        --border: #eadcc5;
+        --shadow: 0 18px 40px rgba(31, 41, 55, 0.14);
+        --r: 18px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        background: radial-gradient(
+            900px 520px at 10% -10%,
+            rgba(245, 158, 11, 0.22),
+            transparent 60%
+          ),
+          linear-gradient(180deg, var(--bg), #fff 60%, var(--bg));
+        color: var(--ink);
+      }
+      .wrap {
+        max-width: 1100px;
+        margin: 18px auto;
+        padding: 14px;
+      }
+      .top {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+      .brand {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .logo {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: conic-gradient(
+          from 220deg,
+          var(--brand2),
+          var(--brand),
+          #ffb020,
+          var(--brand2)
+        );
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        box-shadow: var(--shadow);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+      }
+      .title {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.15;
+      }
+      .sub {
+        margin: 2px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .btn {
+        border: 1px solid var(--border);
+        background: var(--card);
+        color: var(--ink);
+        border-radius: 999px;
+        padding: 10px 12px;
+        font-weight: 900;
+        cursor: pointer;
+        box-shadow: 0 10px 24px rgba(31, 41, 55, 0.08);
+      }
+      .btn.primary {
+        border: 0;
+        background: linear-gradient(180deg, var(--brand2), var(--brand));
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .card {
+        background: rgba(255, 255, 255, 0.86);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        backdrop-filter: blur(6px);
+      }
+      .head {
+        padding: 12px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .frameWrap {
+        position: relative;
+        width: 100%;
+        height: 72vh;
+        min-height: 520px;
+        background: #0b1220;
+      }
+      iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: #0b1220;
+      }
+      .note {
+        padding: 12px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .pill {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 8px 10px;
+        background: rgba(255, 255, 255, 0.7);
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .ok {
+        color: #166534;
+        font-weight: 900;
+      }
+      .warn {
+        color: #92400e;
+        font-weight: 900;
+      }
+      .link {
+        color: var(--brand);
+        font-weight: 900;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <div class="brand">
+          <div class="logo">&lt;/&gt;</div>
+          <div>
+            <h1 class="title">Learn With Champak — Live</h1>
+            <div class="sub"></div>
+          </div>
+        </div>
+        <div class="row">
+          <button class="btn primary" id="openSite">Open Site</button>
+          <button class="btn" id="installBtn" style="display: none">
+            Install App
+          </button>
+          <span style="display: none" class="pill"
+            >Service Worker:
+            <b id="swState" class="warn">not registered</b></span
+          >
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="head">
+            <b>Hello from Champak</b>
+            <div class="row">
+              <a
+                class="link"
+                href="https://learnwithchampak.live"
+                target="_blank"
+                rel="noreferrer"
+                >learnwithchampak.live ↗</a
+              >
+              <span style="display: none" class="pill"
+                >Tip: Add to Home Screen for app-like feel</span
+              >
+            </div>
+          </div>
+          <div class="frameWrap">
+            <iframe
+              id="siteFrame"
+              src="https://learnwithchampak.live"
+              title="Learn With Champak"
+            ></iframe>
+          </div>
+          <div class="note">✅ The Programmer's Picnic.<br /></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("openSite").onclick = () =>
+        window.open("https://learnwithchampak.live", "_blank", "noreferrer");
+
+      const swState = document.getElementById("swState");
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("./service-worker.js")
+          .then(() => {
+            swState.textContent = "active";
+            swState.className = "ok";
+          })
+          .catch(() => {
+            swState.textContent = "failed";
+            swState.className = "warn";
+          });
+      } else {
+        swState.textContent = "not supported";
+        swState.className = "warn";
+      }
+
+      let deferredPrompt = null;
+      const installBtn = document.getElementById("installBtn");
+
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installBtn.style.display = "inline-block";
+      });
+
+      installBtn.onclick = async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        installBtn.style.display = "none";
+      };
+    </script>
+  </body>
+</html>
