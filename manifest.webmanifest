@@ -1,7 +1,7 @@
 {
   "name": "Learn With Champak",
   "short_name": "Champak",
-  "start_url": "./?pwa=1",
+  "start_url": "https://www.learnwithchampak.live/p/pwa.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#fff7e6",
